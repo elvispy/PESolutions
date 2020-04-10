@@ -1,0 +1,13 @@
+#this is a comment in the gitignore file.
+
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.gz
+*.toc
+*.synctex*
+*.exe
+
+
