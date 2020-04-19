@@ -9,5 +9,5 @@
 *.toc
 *.synctex*
 *.exe
-
+*/__pycache__/*
 
