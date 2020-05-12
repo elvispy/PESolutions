@@ -1,27 +1,35 @@
+#PE94
+#This algorithm is not working on Python, try PE94.cpp instead
+#I left this archive undeleted to show it as an example where
+#C++ is more efficient than Python
 import time
 start = time.perf_counter()
-from math import floor, ceil, sqrt
-b1 = lambda k: 3*k*k+4
-b2 = lambda k: 3*k*k+2
-b3 = lambda k: 3*k*k+1
-x = 1
-aux1 = b1(x)
-aux2 = b2(x)
-aux3 = b3(x)
-while aux1 < 1_500_000_000:
-    if int(sqrt(aux1)) == sqrt(aux1):
-        print(4*x*x+1)
-        #print(x, aux1, 1)
-    if int(sqrt(aux2)) == sqrt(aux2):
-        print(2*x*x+1)
-        #print(x, aux2, 2)
-    if int(sqrt(aux3)) == sqrt(aux3):
-        print(x*x+1)
-        #print(x, aux3, 3)
-    
-    x+=1
-    aux1 = b1(x)
-    aux2 = b2(x)
-    aux3 = b3(x)
+import mpmath as mp
+mp.mp.dps = 30
 
+r3 = mp.mpf(1.7320508075688772935274463415058723669428052538104)
+
+def satisfies(x):
+    val = mp.ceil(x*r3)
+    val2 = mp.mpf(3*x*x+2*x-1)
+    if val*val == val2:
+        return True
+    return False
+
+def satisfies2(x):
+    val = mp.floor(x*r3)
+    val2 = mp.mpf(3*x*x-2*x-1)
+    if val*val == val2:
+        return True
+    return False
+
+x = 3
+res = 0
+while (x <= 333_333_333):
+    if (satisfies(x)):
+        res += 3*x-1
+    if satisfies2(x):
+        res+= 3*x+1
+    x+=2
+print(f"El resultado es {res}")
 print(time.perf_counter()-start)
