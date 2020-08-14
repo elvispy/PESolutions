@@ -1,5 +1,6 @@
-#PE
+#PE615
 from time import perf_counter
+from math import log
 t = perf_counter()
 '''
 from pathlib import Path
@@ -9,6 +10,8 @@ with open(path, "r") as f:
     data = data.split("\n")
     data = [int(i) for i in data if i]
 '''
+
+logd = [log(i) for i in data]
 
 
 

@@ -1,4 +1,4 @@
-//PE
+
 #include<iostream>
 #include<stdio.h>
 #include<vector>
@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(){
-	/*
+	
 	FILE *f;
 	FILE *f2;
 		
@@ -20,17 +20,15 @@ int main(){
 	while(!(feof(f)))
 	{
 		fscanf(f, "%i", &val);
-		primes.push_back(val);
+		primes[i] = val;
 		i++;
 		}//end while
 	}//en if
 	else printf("\nError al abrir el archivo\n");
 		
 	fclose(f);
-	*/
 	
-	int res = 0;
-	cout << "El resultado es " << res;
+
 	return 0;	
 }//end main
 
