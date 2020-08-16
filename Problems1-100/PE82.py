@@ -6,56 +6,78 @@ with open("p082_matrix.txt") as f:
 
 rows = content.split("\n")[:-1]
 data = [[int(i) for i in row.split(",")] for row in rows]
-
-
-def minn(tabla, unvisited):
-    for i in [j for j in tabla.keys() if j in unvisited]:
-        if type(tabla[i][0]) == type(0):
-            if 'm' in dir():
-                if tabla[i][0] < m:
-                    m = tabla[i][0]
-                    res = i
-            else:
-                m = tabla[i][0]
-                res = i
-    return res
-            
-            
-
-def dijkstra(ini, tipo = 1):
-    if tipo != 1:
-        ini = (0, 0)
-    aux = len(data)
-    unvisited = []
-    for i in range(aux):
-        for j in range(aux):
-            unvisited.append((i, j))
-    tabla = {i:["infty", ()] for i in unvisited}
-    tabla[ini] = [0, ()]
-    while unvisited:
-        vertex = minn(tabla, unvisited)
-        if tipo == 1:
-            neighbors = set([(vertex[0] + 1, vertex[1]), (vertex[0] - 1, vertex[1]), (vertex[0], vertex[1] + 1)])
-        else:
-            neighbors = set([(vertex[0] + 1, vertex[1]), (vertex[0] - 1, vertex[1]), (vertex[0], vertex[1] + 1), (vertex[0], vertex[1]-1)])
-        for el in neighbors:
-            if (-1 < el[0] and el[0] < aux and -1<el[1] and el[1] < aux):
-                if type(tabla[el][0]) != type(0) or tabla[vertex][0] + data[el[0]][el[1]] < tabla[el][0]:
-                    tabla[el] = [tabla[vertex][0] + data[el[0]][el[1]], vertex]
-
-        print("Lol", len(unvisited))
-        unvisited.remove(vertex)
-    if tipo == 1:
-        return min([tabla[i][aux-1] for i in range(aux)])
-    else:
-        return tabla[aux-1][aux-1]
-    
-                        
-
-res = []
+data2 = []
 for i in range(len(data)):
-    print(i)
-    res.append(dijkstra((0, i)))
-res = min(res)
+    col = []
+    for j in range(len(data[i])):
+        col.append(data[j][i])
+    data2.append(col)
+
+def minn(col1, col2):
+    #This function returns a list with the shortest path in
+    #every index
+    res = []
+    for i in range(len(col1)):
+        minalt = col2[i] + col1[i]
+
+        if i > 0:
+            #Here we need to take advantage of previous computations
+            if res[-1][1]:
+                if res[-1][0] - col1[i-1] == col1[i] + col2[i]:
+                    res.append([res[-1][0] - col1[i-1], False])
+                else:
+                    res.append([res[-1][0] - col1[i-1], True])
+            else:
+                if res[-1][0] < col2[i]:
+                    res.append([res[-1][0] + col1[i], False])
+                else:
+                    idxdown = 1
+                    pathdown = col1[i]
+                    while i + idxdown < len(col1):
+                        pathdown += col1[i+idxdown]
+                        if pathdown >= minalt:
+                            break
+                        elif pathdown + col2[i + idxdown] < minalt:
+                            minalt = pathdown + col2[i + idxdown]
+
+                        idxdown += 1
+
+                    if minalt == col1[i] + col2[i]:
+                        res.append([minalt, False])
+                    else:
+                        res.append([minalt, True])
+                      
+        else:
+                 
+            idxdown = 1
+            pathdown = col1[i]
+            while i + idxdown < len(col1):
+                pathdown += col1[i+idxdown]
+                if pathdown >= minalt:
+                    break
+                elif pathdown + col2[i + idxdown] < minalt:
+                    minalt = pathdown + col2[i + idxdown]
+
+                idxdown += 1
+
+            if i == 0 and minalt < col1[0] + col2[0]:
+                is_down = True
+            else:
+                is_down = False
+
+            res.append([minalt, is_down])
+
+    return [el[0] for el in res]
+
+while len(data2) > 1:
+    data2 = data2[:-2] + [minn(data2[-2], data2[-1])]
+
+
+            
+
+    
+
+
+res = min(data2[0])
 print(f"The result is: {res}")
 print("The time spent is: {}".format(perf_counter()-t))
