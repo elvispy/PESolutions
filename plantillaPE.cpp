@@ -30,6 +30,7 @@ int main(){
 	*/
 	
 	int res = 0;
+
 	cout << "El resultado es " << res;
 	return 0;	
 }//end main
