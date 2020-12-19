@@ -56,7 +56,7 @@ int main(){
 	while(decoms[N-1] == 0){
 		//cout << current << "\n";
 		if(counter%100000 == 0){
-			cout << counter << res << "\n";
+			cout << counter << " " << res << "\n";
 		}
 		phi = phin(decoms, current);
 		
