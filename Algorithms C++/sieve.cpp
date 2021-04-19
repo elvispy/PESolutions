@@ -35,7 +35,7 @@ void fillSieve(big size){
 }//end function definition
 
 int main(){
-	fillSieve(1000000);
-	cout << sieve[2010];
+	fillSieve(100000000000);
+	cout << isPrime(2013);
 	return 0;
 }
