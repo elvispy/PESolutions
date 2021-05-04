@@ -83,6 +83,6 @@ def brute(n):
 def rev_below(n):
     #All reversible numbers with n digist or less
     return sum([reversible(i) for i in range(1, n+1)])
-
-print("El resultado es: {}".format(rev_below(9)))
+print(reversible(8))
+#print("El resultado es: {}".format(rev_below(9)))
 print("The time spent is: {:.3f}".format(perf_counter()-t))
