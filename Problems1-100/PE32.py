@@ -31,5 +31,5 @@ while result != [6, 7, 8, 9]:
             result = [result[0], result[1], result[2]+1, result[2]+2]
     else:
         result[-1] +=1
-        
+print(sum(panpro))  
 print(time.perf_counter()-start)
