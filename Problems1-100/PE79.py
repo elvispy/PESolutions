@@ -1,56 +1,45 @@
-<<<<<<< HEAD
-with open("p079_keylog.txt", "r") as f:
-    content = f.read()
-logs = content.split("\n")
-logs = [log for log in logs if len(log) > 0]
-pos = []
-for log in logs:
-    aux = [log[0], log[1], log[2]]
-    newpos = []
-    for po in pos:
-        try:
-            x = po.index(log[0])
-            try:
-                y = po.index(log[1])
-                try:
-                    z = po.index(log[2])
-                    #all of them are present, just add it to the new possibilities
-                    newpos.append(pos)
-                except:
-                    for i in range(y+1, len(pos)+1):
-                        lolazo = pos[:i] + log[2] + pos[i:]
-                        if lolazo in newpos:
-                            pass
-                        else:
-                            newpos.append(lolazo)
-                    #just the first two are present
-                    pass
-            except:
-                try:
-                    z = po.index(log[2])
-                    #second is not present
-                except:
-                    #just the first is present
-                    pass
-                pass
-        except:
-            try:
-                y = po.index(log[1])
-                try:
-                    z = po.index(log[2])
-                    #The first is not present
-                except:
-                    #Just the second is present
-            except:
-                try:
-                    z = po.index(log[2])
-                    #just the last one is present
-                except:
-                    #None of them are present
-    pos = newpos
-=======
-a = None
-with open("p079_keylog.txt") as f:
+#PE79
+from time import perf_counter
+t = perf_counter()
+'''
+Idk wth this script works
+'''
+
+from pathlib import Path
+path = Path(__file__).parent / 'p079_keylog.txt'
+with open(path, "r") as f:
     data = f.read()
-data = data.split("\n")[:-1]
->>>>>>> 873e116bc2b8facd3ca6576cb7ceac81448520e2
+    data = data.split("\n")[:-1]
+    # data = [int(i) for i in data if i]
+data = [list(i) for i in data]
+knownMin = 10 * len(data[0])
+
+def dynamic_check(data) -> int:
+    res = 0
+    while len(data) > 0:
+        firsts = [el[0] for el in data]
+        counter = [firsts.count(str(i)) for i in range(10)]
+        maxx = max(counter)
+        midx = str(counter.index(maxx))
+        print(midx, end = '')
+        res += 1
+        data2 = []
+        for el in data:
+            if el == [midx]:
+                continue
+            elif el[0] == midx:
+                data2.append(el[1:])
+            else:
+                data2.append(el)
+        data = data2.copy()
+        del data2
+    return res
+
+
+
+
+# assertion block
+# assert 2 == 2
+print("El resultado es: ", end='')
+dynamic_check(data)
+
