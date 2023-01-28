@@ -47,7 +47,7 @@ def find_min(X):
     (2-X) 2^(2n-1) >= X/2 ncr(2n, n) >= 
     X/2 4^n/sqrt(pi(n + 1/pi))
     iff
-    sqrt(pi(n + 1/pi)) >= (2-x)/X
+    sqrt(pi(n + 1/pi)) >= X/(X-2)
     This approximation, stronger than Stirling's
     is sharp enough to give the exact result even
     for X = 1.9999

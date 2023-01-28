@@ -13,6 +13,7 @@ def hexagon(n: int) -> int:
     return res
 
 
-res = sum([hexagon(i) for i in range(3, 12346)])
-print("El resultado es: {}".format(res))
+#res = sum([hexagon(i) for i in range(3, 12346)])
+print(hexagon(3), hexagon(6), hexagon(20))
+#print("El resultado es: {}".format(res))
 print("The time spent is: {}".format(perf_counter()-t))
