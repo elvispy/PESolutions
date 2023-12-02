@@ -2,16 +2,16 @@
 
 using Primes;
 """
-The idea is that 2n^2-1 ≡ 1 mod p ⟺ (2^-1 p) = 1 (Legendre Symbol) ⟺ (2 p) = 1
+The idea is that 2n^2 ≡ 1 mod p ⟺ (2^-1 p) = 1 (Legendre Symbol) ⟺ (2 p) = 1
 
 That's true when p ≡ ±1 (mod 8). So we only need to test primality on a subset of primes
 
-On the other hand, when p ≡ -1 (mod 8), n ≡ ±2^(2k+1) are the only solutions to the original equation
+On the other hand, when p ≡ -1 (mod 8), (p = 8k+7), n ≡ ±2^(2k+1) are the only solutions to the original equation
 
-For p ≡ 1, we must find which n's are good, organically. 
+For p ≡ 1 (mod 8), we must find which n's are good, organically. 
 """
 
-M = 50000000; # Max number for need
+M = 50000000; # Max number for n
 P = floor(Int64, sqrt(2*M^2 - 1)); # Maximum prime allowed
 
 
