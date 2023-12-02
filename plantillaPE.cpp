@@ -3,6 +3,8 @@
 #include<stdio.h>
 #include<vector>
 
+int M = 1000000;
+
 using namespace std;
 typedef unsigned long long int big;
 
